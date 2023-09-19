@@ -14,7 +14,12 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@brag-document/components": ["modules/shared/components/src/index.ts"],
+      "@brag-document/components/server": [
+        "modules/shared/components/src/server.ts"
+      ]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
