@@ -1,0 +1,11 @@
+/*
+ * This ts.config is currently being used only because shadcn CLI does not support NX
+ */
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@brag-document/components": ["modules/shared/components/src/index.ts"]
+    }
+  }
+}
