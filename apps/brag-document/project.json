@@ -1,7 +1,7 @@
 {
-  "name": "spa",
+  "name": "brag-document",
   "$schema": "../../node_modules/nx/schemas/project-schema.json",
-  "sourceRoot": "apps/spa/src",
+  "sourceRoot": "apps/brag-document/src",
   "projectType": "application",
   "targets": {
     "build": {
@@ -9,7 +9,7 @@
       "outputs": ["{options.outputPath}"],
       "defaultConfiguration": "production",
       "options": {
-        "outputPath": "dist/apps/spa"
+        "outputPath": "dist/apps/brag-document"
       },
       "configurations": {
         "development": {
@@ -24,15 +24,15 @@
       "executor": "@nx/vite:dev-server",
       "defaultConfiguration": "development",
       "options": {
-        "buildTarget": "spa:build"
+        "buildTarget": "brag-document:build"
       },
       "configurations": {
         "development": {
-          "buildTarget": "spa:build:development",
+          "buildTarget": "brag-document:build:development",
           "hmr": true
         },
         "production": {
-          "buildTarget": "spa:build:production",
+          "buildTarget": "brag-document:build:production",
           "hmr": false
         }
       }
@@ -41,14 +41,14 @@
       "executor": "@nx/vite:preview-server",
       "defaultConfiguration": "development",
       "options": {
-        "buildTarget": "spa:build"
+        "buildTarget": "brag-document:build"
       },
       "configurations": {
         "development": {
-          "buildTarget": "spa:build:development"
+          "buildTarget": "brag-document:build:development"
         },
         "production": {
-          "buildTarget": "spa:build:production"
+          "buildTarget": "brag-document:build:production"
         }
       }
     },
@@ -56,7 +56,7 @@
       "executor": "@nx/vite:test",
       "outputs": ["{options.reportsDirectory}"],
       "options": {
-        "reportsDirectory": "../../coverage/apps/spa"
+        "reportsDirectory": "../../coverage/apps/brag-document"
       }
     },
     "lint": {
