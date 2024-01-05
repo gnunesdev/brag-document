@@ -14,7 +14,11 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@brag-document/brag-document-module": [
+        "modules/brag-document/src/index.ts"
+      ]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
