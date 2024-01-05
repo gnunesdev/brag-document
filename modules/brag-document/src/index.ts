@@ -1,1 +1,1 @@
-export * from './lib/brag-document-module';
+export * from './pages/home';
