@@ -15,7 +15,8 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@brag-document": ["modules/brag-document/src/index.ts"]
+      "@brag-document": ["modules/brag-document/src/index.ts"],
+      "@brag-document/ui": ["modules/ui/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]
