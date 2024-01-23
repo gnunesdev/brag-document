@@ -5,7 +5,7 @@ export const Header = () => {
     <header className="p-4 border-b border-stone-800">
       <div className="flex justify-center items-center">
         <h1 className="text-xl text-white font-bold">Brag document</h1>
-        <NotebookPen className="ml-2" size={20} />
+        <NotebookPen className="ml-2" size={20} color="white" />
       </div>
     </header>
   );

@@ -1,4 +1,10 @@
-import { Button, Checkbox, FormDescription, Input } from '@brag-document/ui';
+import {
+  Button,
+  Checkbox,
+  DatePicker,
+  FormDescription,
+  Textarea,
+} from '@brag-document/ui';
 
 import * as z from 'zod';
 
@@ -15,12 +21,17 @@ import {
 } from '@brag-document/ui';
 
 const formAddItemSchema = z.object({
-  description: z.string().min(10),
+  description: z
+    .string()
+    .min(10, 'Esse campo deve conter no mínimo 10 caracteres.'),
   cultureValue: z
     .array(z.string())
     .refine((value) => value.some((item) => item), {
       message: 'Escolha pelo menos um valor.',
     }),
+  date: z.date({
+    required_error: 'É necessário adicionar uma data.',
+  }),
 });
 
 const cultureValues = [
@@ -39,14 +50,6 @@ const cultureValues = [
   {
     id: 'inovacao',
     label: 'Inovação',
-  },
-  {
-    id: 'downloads',
-    label: 'Downloads',
-  },
-  {
-    id: 'documents',
-    label: 'Documents',
   },
 ] as const;
 
@@ -68,7 +71,7 @@ export const FormAddItem = () => {
   return (
     <div className="w-full flex flex-col items-center m-9 text-white">
       <div className="w-full max-w-3xl border border-stone-800 p-4 text-base flex flex-col">
-        <p>Adicionar item</p>
+        <p className="font-bold">Adicionar item</p>
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
             <FormField
@@ -78,9 +81,25 @@ export const FormAddItem = () => {
                 <FormItem className="mt-4">
                   <FormLabel>Descrição</FormLabel>
                   <FormControl>
-                    <Input placeholder="" {...field} className="text-black" />
+                    <Textarea
+                      {...field}
+                      placeholder="Explique melhor sobre o item que você quer adicionar"
+                      className="text-black resize-none"
+                    />
                   </FormControl>
                   <FormMessage />
+                </FormItem>
+              )}
+            />
+            <FormField
+              control={form.control}
+              name="date"
+              render={({ field }) => (
+                <FormItem className="flex flex-col mt-4 text-black">
+                  <FormLabel className="text-white">Data</FormLabel>
+                  <FormControl>
+                    <DatePicker value={field.value} onChange={field.onChange} />
+                  </FormControl>
                 </FormItem>
               )}
             />
@@ -135,6 +154,7 @@ export const FormAddItem = () => {
                 </FormItem>
               )}
             />
+
             <Button type="submit">Salvar</Button>
           </form>
         </Form>
