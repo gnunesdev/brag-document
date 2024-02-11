@@ -7,3 +7,5 @@ export * from './select';
 export * from './checkbox';
 export * from './date-picker';
 export * from './utils';
+export * from './dialog';
+export * from './theme-provider';

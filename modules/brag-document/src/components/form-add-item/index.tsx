@@ -4,6 +4,7 @@ import {
   DatePicker,
   FormDescription,
   Textarea,
+  cn,
 } from '@brag-document/ui';
 
 import * as z from 'zod';
@@ -55,7 +56,11 @@ const cultureValues = [
 
 type FormValues = z.infer<typeof formAddItemSchema>;
 
-export const FormAddItem = () => {
+type Props = {
+  className?: string;
+};
+
+export const FormAddItem = ({ className }: Props) => {
   const form = useForm<FormValues>({
     resolver: zodResolver(formAddItemSchema),
     defaultValues: {
@@ -69,9 +74,10 @@ export const FormAddItem = () => {
   }
 
   return (
-    <div className="w-full flex flex-col items-center m-9 text-white">
-      <div className="w-full max-w-3xl border border-stone-800 p-4 text-base flex flex-col">
-        <p className="font-bold">Adicionar item</p>
+    <div
+      className={cn('w-full flex flex-col items-center text-white', className)}
+    >
+      <div className="w-full border-stone-800 p-4 text-base flex flex-col">
         <Form {...form}>
           <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
             <FormField
@@ -84,7 +90,7 @@ export const FormAddItem = () => {
                     <Textarea
                       {...field}
                       placeholder="Explique melhor sobre o item que você quer adicionar"
-                      className="text-black resize-none"
+                      className=" resize-none"
                     />
                   </FormControl>
                   <FormMessage />
@@ -95,8 +101,8 @@ export const FormAddItem = () => {
               control={form.control}
               name="date"
               render={({ field }) => (
-                <FormItem className="flex flex-col mt-4 text-black">
-                  <FormLabel className="text-white">Data</FormLabel>
+                <FormItem className="flex flex-col mt-4 ">
+                  <FormLabel className="">Data</FormLabel>
                   <FormControl>
                     <DatePicker value={field.value} onChange={field.onChange} />
                   </FormControl>
