@@ -1,5 +1,6 @@
 import { initTRPC } from '@trpc/server';
 import { z } from 'zod';
+import { prisma } from './prisma';
 
 type User = {
   id: string;
@@ -12,8 +13,11 @@ const users: Record<string, User> = {};
 export const t = initTRPC.create({});
 
 export const appRouter = t.router({
-  getUser: t.procedure.input(z.string()).query((opts) => {
-    return users[opts.input];
+  getUserById: t.procedure.input(z.string()).query(async (opts) => {
+    const user = await prisma.user.findUnique({
+      where: { email: opts.input },
+    });
+    return user;
   }),
   createUser: t.procedure
     .input(
