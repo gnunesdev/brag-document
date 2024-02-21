@@ -1,22 +1,28 @@
-export const EmptyState = () => {
+import { Link } from '@tanstack/react-router';
+
+type Props = {
+  className?: string;
+};
+
+export const EmptyState = ({ className }: Props) => {
   return (
-    <div className="flex flex-col items-center">
-      <h2 className="text-5xl bold">oops!</h2>
-      <img
-        className="max-w-sm mt-8"
-        src="/assets/thinking.svg"
-        alt="Mulher ao redor de seus pensamentos"
-      />
-      <p className="mt-8 max-w-md text-center text-xl">
-        parece que não tem nenhum item cadastrado, que tal{' '}
-        <strong
-          role="button"
-          className="text-red-500 cursor-pointer hover:text-red-700 transition-colors"
-        >
-          adicionar
-        </strong>{' '}
-        o primeiro?
-      </p>
+    <div className={className}>
+      <div className="flex flex-col items-center">
+        <img
+          className="max-w-4xl mt-8"
+          src="/assets/empty-state-background.svg"
+          alt="Mulher ao redor de seus pensamentos"
+        />
+        <h3 className="text-2xl bold mt-8">Adicione seu primeiro item</h3>
+        <p className="mt-4 max-w-xl text-center">
+          Comece{' '}
+          <strong role="button" className="text-red-500 transition-colors">
+            adicionando
+          </strong>{' '}
+          o primeiro item do seu brag document a fim de manter atualizado todos
+          os seus feitos ao decorrer do ciclo.
+        </p>
+      </div>
     </div>
   );
 };
