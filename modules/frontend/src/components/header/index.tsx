@@ -5,7 +5,7 @@ import {
   DialogDescription,
   DialogHeader,
   DialogTitle,
-} from '@brag-document/frontend/ui';
+} from '@brag-document/ui';
 import { NotebookPen } from 'lucide-react';
 import { useState } from 'react';
 
@@ -29,7 +29,7 @@ export const Header = () => {
           <DialogHeader>
             <DialogTitle>Adicionar item</DialogTitle>
             <DialogDescription>
-              <FormAddItem />
+              <FormAddItem onSuccess={() => setIsModalOpen(false)} />
             </DialogDescription>
           </DialogHeader>
         </DialogContent>

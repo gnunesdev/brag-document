@@ -1,3 +1,4 @@
+import cors from '@fastify/cors';
 import {
   FastifyTRPCPluginOptions,
   fastifyTRPCPlugin,
@@ -10,6 +11,8 @@ import { appRouter } from './router';
 const server = fastify({
   maxParamLength: 5000,
 });
+
+server.register(cors);
 
 server.register(fastifyTRPCPlugin, {
   prefix: '/trpc',

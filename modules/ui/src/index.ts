@@ -9,3 +9,5 @@ export * from './date-picker';
 export * from './utils';
 export * from './dialog';
 export * from './theme-provider';
+
+export * from './toast';

@@ -1,5 +1,5 @@
 import { trpc } from '@brag-document/frontend';
-import { ThemeProvider } from '@brag-document/frontend/ui';
+import { ThemeProvider, Toaster } from '@brag-document/ui';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { RouterProvider } from '@tanstack/react-router';
 import { httpBatchLink } from '@trpc/client';
@@ -31,6 +31,7 @@ export const App = () => {
       <trpc.Provider client={trpcClient} queryClient={queryClient}>
         <QueryClientProvider client={queryClient}>
           <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+            <Toaster />
             <RouterProvider router={router} />
           </ThemeProvider>
         </QueryClientProvider>

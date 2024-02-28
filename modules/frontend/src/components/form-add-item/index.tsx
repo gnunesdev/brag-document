@@ -1,3 +1,4 @@
+import { addItemSchema } from '@brag-document/shared';
 import {
   Button,
   Checkbox,
@@ -5,7 +6,8 @@ import {
   FormDescription,
   Textarea,
   cn,
-} from '@brag-document/frontend/ui';
+  useToast,
+} from '@brag-document/ui';
 import {
   Form,
   FormControl,
@@ -13,24 +15,12 @@ import {
   FormItem,
   FormLabel,
   FormMessage,
-} from '@brag-document/frontend/ui';
+} from '@brag-document/ui';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { useForm } from 'react-hook-form';
 import * as z from 'zod';
 
-export const formAddItemSchema = z.object({
-  description: z
-    .string()
-    .min(10, 'Esse campo deve conter no mínimo 10 caracteres.'),
-  cultureValue: z
-    .array(z.string())
-    .refine((value) => value.some((item) => item), {
-      message: 'Escolha pelo menos um valor.',
-    }),
-  date: z.date({
-    required_error: 'É necessário adicionar uma data.',
-  }),
-});
+import { useAddItem } from '../../hooks/services/use-add-item';
 
 const cultureValues = [
   {
@@ -51,15 +41,28 @@ const cultureValues = [
   },
 ] as const;
 
-type FormValues = z.infer<typeof formAddItemSchema>;
+type FormValues = z.infer<typeof addItemSchema>;
 
 type Props = {
   className?: string;
+  onSuccess?: VoidFunction;
 };
 
-export const FormAddItem = ({ className }: Props) => {
+export const FormAddItem = ({ className, onSuccess }: Props) => {
+  const { toast } = useToast();
+
+  const { handleCreateItem, isLoading } = useAddItem({
+    handleSuccess: () => {
+      toast({
+        description: 'Item adicionado com sucesso ✅',
+      });
+
+      onSuccess?.();
+    },
+  });
+
   const form = useForm<FormValues>({
-    resolver: zodResolver(formAddItemSchema),
+    resolver: zodResolver(addItemSchema),
     defaultValues: {
       description: '',
       cultureValue: [],
@@ -67,7 +70,7 @@ export const FormAddItem = ({ className }: Props) => {
   });
 
   function onSubmit(values: FormValues) {
-    console.log(values);
+    handleCreateItem(values);
   }
 
   return (
@@ -158,7 +161,9 @@ export const FormAddItem = ({ className }: Props) => {
               )}
             />
 
-            <Button type="submit">Salvar</Button>
+            <Button type="submit">
+              {isLoading ? 'Carregando...' : 'Salvar'}
+            </Button>
           </form>
         </Form>
       </div>
